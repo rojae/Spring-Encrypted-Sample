@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+	<context id="context1" targetRuntime="MyBatis3simple">
+		<jdbcConnection
+			connectionURL="jdbc:mariadb://"
+			driverClass="org.mariadb.jdbc.Driver"
+			password="" userId="" />
+
+		<javaModelGenerator
+			targetPackage="com.encrypted.demo.domain"
+			targetProject="EncryptedSample/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="mybatis.mariadb"
+			targetProject="EncryptedSample/src/main/resources/" />
+
+		<javaClientGenerator
+			targetPackage="com.encrypted.demo.mapper"
+			targetProject="EncryptedSample/src/main/java" type="XMLMAPPER" />
+
+		<table schema="sh" tableName="tb_rsa_demo" />
+		
+	</context>
+</generatorConfiguration>
