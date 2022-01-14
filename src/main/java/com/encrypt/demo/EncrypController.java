@@ -1,5 +1,6 @@
 package com.encrypt.demo;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -7,6 +8,7 @@ import java.util.Base64;
 import com.encrypt.demo.utils.HexUtil;
 import com.encrypt.demo.encrypt.CryptoUtil;
 import com.encrypt.demo.service.UserService;
+import com.encrypt.demo.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -65,7 +67,10 @@ public class EncrypController {
         byte[] decryptedAesKey = HexUtil.convertHexStringToBytes(new String(decryptedAesKeyHex));
         System.out.printf("Decrypted Aes Key [len=%d]: %s\n", decryptedAesKey.length, new String(decryptedAesKey));
         //initialization vector - 1st 16 chars of userId
-        byte []iv = user.getId().substring(0,16).getBytes();
+        // 일반적인 경우
+        //byte []iv = user.getId().substring(0,16).getBytes();
+        // 보안을 좀더 높일 경우
+        byte []iv = MD5Util.digestToString(user.getRsaPublicKey().getBytes(StandardCharsets.UTF_8)).substring(0, 16).getBytes(StandardCharsets.UTF_8);
 
         System.out.printf("Encrypted transaction BASE64 [len=%d]: %s\n", encryptedTransaction.getPayload().length(), encryptedTransaction.getPayload());
 
