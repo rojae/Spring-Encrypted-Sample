@@ -23,3 +23,6 @@
 ### data.sql
 /src/main/resources/mbg/data.sql
 
+### 참고용 샘플
+- 자바 데모 : https://github.com/rojae/Encrypt-Demo-Java
+
